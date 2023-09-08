@@ -21,7 +21,22 @@ namespace SearchService.Consumers
         {
             System.Console.WriteLine("====> Consuming Auction Created " + context.Message.Id);
             var item = _mapper.Map<Item>(context.Message);
-            await item.SaveAsync();
+            try
+            {
+                System.Console.WriteLine("======================Saving...======================");
+                await item.SaveAsync();
+            }
+            catch (System.TimeoutException ex)
+            {
+                System.Console.WriteLine("Yo... Timeout");
+                throw new TimeoutException("Cant Save Car Something went Wrong");
+            }
+            catch (System.Exception ex)
+            {
+                System.Console.WriteLine("Something went wrong");
+                throw new ArgumentException("Cant Save Car Something went Wrong", ex.Message);
+            }
+
         }
     }
 }
