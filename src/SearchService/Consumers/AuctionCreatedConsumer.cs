@@ -26,7 +26,7 @@ namespace SearchService.Consumers
                 System.Console.WriteLine("======================Saving...======================");
                 await item.SaveAsync();
             }
-            catch (System.TimeoutException ex)
+            catch (System.TimeoutException)
             {
                 System.Console.WriteLine("Yo... Timeout");
                 throw new TimeoutException("Cant Save Car Something went Wrong");
