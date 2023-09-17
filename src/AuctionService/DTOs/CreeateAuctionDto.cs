@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AuctionService.DTOs;
 
-public class CreeateAuctionDto
+public class CreateAuctionDto
 {
     [Required]
     public string Make { get; set; }
