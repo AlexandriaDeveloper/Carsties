@@ -18,6 +18,7 @@ export default  function Listings() {
 
  const [data,setData] = React.useState<PageResult< Auction>>();
   const params= useParamsStore(state => ({
+    pageCount:state.pageCount,
     pageNumber:state.pageNumber,
     pageSize:state.pageSize,
     searchTerm:state.searchTerm,
@@ -34,7 +35,7 @@ export default  function Listings() {
 
   useEffect(() => {
     getData(url).then(data => {
-      setData(data)
+      setData(data);
     })
   }, [url])
 
@@ -63,6 +64,10 @@ export default  function Listings() {
   )
 }
 function useAuctionStore(arg0: (state: any) => any) {
+  throw new Error('Function not implemented.');
+}
+
+function usestorewithequalityfn(arg0: (state: any) => { pageNumber: any; pageSize: any; searchTerm: any; orderBy: any; filterBy: any; }, shallow: <T>(objA: T, objB: T) => boolean) {
   throw new Error('Function not implemented.');
 }
 

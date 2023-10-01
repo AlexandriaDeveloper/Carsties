@@ -42,7 +42,7 @@ export const useParamsStore = create<State & Action>()((set) => ({
         })
     },
     reset:()=>set(initialState),
-    setSearchValue: (val) =>{
-        set({searchValue:val})
+    setSearchValue: (value: string) => {
+        set({searchValue: value})
     }
 }))

@@ -67,6 +67,8 @@ namespace AuctionService.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateAuction(Guid id, UpdateAuctionDto updateAuctionDto)
         {
+            Console.WriteLine(updateAuctionDto);
+
             var auction = await _repo.GetAuctionEntityByIdAsync(id);
             if (auction == null) return NotFound();
 
@@ -77,10 +79,12 @@ namespace AuctionService.Controllers
             auction.Item.Color = updateAuctionDto.Color ?? auction.Item.Color;
             auction.Item.Mileage = updateAuctionDto.Mileage ?? auction.Item.Mileage;
             auction.Item.Year = updateAuctionDto.Year ?? auction.Item.Year;
+
             await _publishEndpoint.Publish(_mapper.Map<AuctionUpdated>(auction));
             var result = await _repo.SaveChangesAsync();
-            if (!result) return BadRequest("Failed to update auction");
-            return Ok();
+            if (result) return Ok();
+
+            return BadRequest("Problem saving changes");
         }
         [Authorize]
         [HttpDelete("{id}")]
