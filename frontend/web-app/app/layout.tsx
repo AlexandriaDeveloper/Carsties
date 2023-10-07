@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import Navbar from './nav/navbar'
+import ToasterProvider from './providers/ToasterProvider'
 
 
 
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
 
       <body >
+        <ToasterProvider />
         <Navbar></Navbar>
         <main className='container mx-auto px-5 pt-10'>
         {children}

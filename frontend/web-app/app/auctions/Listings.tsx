@@ -23,7 +23,11 @@ export default  function Listings() {
     pageSize:state.pageSize,
     searchTerm:state.searchTerm,
     orderBy:state.orderBy,
-    filterBy:state.filterBy})
+    filterBy:state.filterBy,
+    seller:state.seller,
+    winner:state.winner
+  
+  })
     ,shallow)
   const setParams = useParamsStore(state => state.setParams); 
  
@@ -63,11 +67,3 @@ export default  function Listings() {
 
   )
 }
-function useAuctionStore(arg0: (state: any) => any) {
-  throw new Error('Function not implemented.');
-}
-
-function usestorewithequalityfn(arg0: (state: any) => { pageNumber: any; pageSize: any; searchTerm: any; orderBy: any; filterBy: any; }, shallow: <T>(objA: T, objB: T) => boolean) {
-  throw new Error('Function not implemented.');
-}
-

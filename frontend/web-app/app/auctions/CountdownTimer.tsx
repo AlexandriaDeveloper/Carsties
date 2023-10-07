@@ -1,4 +1,5 @@
-import { type } from 'os';
+
+'use client'
 import React from 'react'
 import Countdown, { zeroPad } from 'react-countdown';
 type Pros={

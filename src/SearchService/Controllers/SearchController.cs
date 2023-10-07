@@ -34,7 +34,7 @@ public class SearchController : ControllerBase
         }
         if (!string.IsNullOrEmpty(searchParams.Winner))
         {
-            query.Match(x => x.Seller == searchParams.Winner);
+            query.Match(x => x.Winner == searchParams.Winner);
         }
 
         query.PageNumber(searchParams.PageNumber);
