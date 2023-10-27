@@ -16,11 +16,11 @@ public class AuctionFinishedConsumer : IConsumer<AuctionFinished>
     public async Task Consume(ConsumeContext<AuctionFinished> context)
     {
         System.Console.WriteLine("=============>AuctionFinished Consumer");
-        var auction = await _contexct.Auctions.FindAsync(context.Message.AuctionId);
+        var auction = await _contexct.Auctions.FindAsync(Guid.Parse(context.Message.AuctionId));
         if (context.Message.ItemSold)
         {
             auction.Winner = context.Message.Winner;
-            auction.SoldAmount = context.Message.Amount;
+            auction.SoldAmount = (int)context.Message.Amount;
 
         }
         auction.Status = auction.SoldAmount > auction.ReservePrice
