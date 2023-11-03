@@ -1,7 +1,7 @@
 
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AuctionCard from './AuctionCard';
 import { Auction, PageResult } from '@/types';
 import AppPagination from '../components/AppPagination';
@@ -11,12 +11,13 @@ import { useParamsStore } from '@/hooks/useParamsStore';
 import { shallow } from 'zustand/shallow';
 import qs from 'query-string';
 import EmptyFilter from '../components/EmptyFilter';
+import { useAuctionStore } from '@/hooks/useAuctionStore';
 
 
 
 export default  function Listings() {
 
- const [data,setData] = React.useState<PageResult< Auction>>();
+   const [loading,setLoading] = useState(true);
   const params= useParamsStore(state => ({
     pageCount:state.pageCount,
     pageNumber:state.pageNumber,
@@ -29,8 +30,15 @@ export default  function Listings() {
   
   })
     ,shallow)
+    const data =useAuctionStore(state => ({
+      auctions : state.auctions,
+      totalCount : state.totalCount,
+      pageCount : state.pageCount
+    }),shallow)
+
+
   const setParams = useParamsStore(state => state.setParams); 
- 
+ const setData=useAuctionStore(state => state.setData);
    const url =qs.stringifyUrl({url:'',query:params});
   function setPageNumber(pageNumber:number){
    
@@ -40,10 +48,11 @@ export default  function Listings() {
   useEffect(() => {
     getData(url).then(data => {
       setData(data);
+      setLoading(false);
     })
   }, [url])
 
-  if(!data) return <h3>Loading .....</h3>
+  if(loading) return <h3>Loading .....</h3>
   
 
   return (
@@ -52,7 +61,7 @@ export default  function Listings() {
     {data.totalCount===0 ?(<EmptyFilter  showReset/>):(
       <>
          <div className='grid grid-cols-4 gap-6'>
-        {data.results.map((auction ) => (
+        {data.auctions.map((auction ) => (
         <AuctionCard auction={auction} key={auction.id}/>
         ))}
       </div>

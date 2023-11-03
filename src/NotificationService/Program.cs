@@ -19,6 +19,6 @@ builder.Services.AddMassTransit(x =>
 });
 builder.Services.AddSignalR();
 var app = builder.Build();
-app.MapHub<NotificationHub>("/notificatioins");
+app.MapHub<NotificationHub>("/notifications");
 
 app.Run();

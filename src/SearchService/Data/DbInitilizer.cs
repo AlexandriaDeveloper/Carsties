@@ -7,6 +7,7 @@ public class DbInitilizer
 {
     public static async Task InitDb(WebApplication app)
     {
+        Console.WriteLine("===========>DbInitilizer Seed MongoDb");
         await DB.InitAsync("SearchDb", MongoClientSettings.FromConnectionString(app.Configuration.GetConnectionString("MongoDbConnection")));
         await DB
         .Index<Item>()
@@ -35,5 +36,7 @@ public class DbInitilizer
         {
             await DB.SaveAsync(items);
         }
+
+        Console.WriteLine("done successfully");
     }
 }
